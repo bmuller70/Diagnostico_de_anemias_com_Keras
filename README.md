@@ -41,7 +41,7 @@ Citar codigo
 
 Os dados numéricos dos exames de sangue foram normalizados usando a técnica de StandardScaler para padronizar as entradas entre valores com média 0 e desvio padrão 1. Isso se deu devido a grande amplitude entre os valores dos parâmetros dos exames. 
 
-
+![](graficos_parametros.png)
 
 
 

@@ -35,15 +35,73 @@ Cada entrada está associada a um diagnósticos binário relacionado a diferente
 
 
 ## Pré-Processamento
-O dataset do Kaggle possui uma coluna “Diagnosis” onde tinha o diagnostico descritivo. Para que o modelo conseguisse ligar com essas entradas foi necessário transformar em colunas binarias(dummy). 
-Citar codigo
+O dataset do Kaggle possuía uma coluna chamada “Diagnosis”, contendo os diagnósticos de forma descritiva. Para que o modelo pudesse lidar com essas informações, foi necessário transformar essa coluna em variáveis binárias (dummies).
+
+```
+diagnosis_dummies = pd.get_dummies(df['Diagnosis'])
+df = pd.concat([df, diagnosis_dummies], axis=1)
+
+```
 
 
-Os dados numéricos dos exames de sangue foram normalizados usando a técnica de StandardScaler para padronizar as entradas entre valores com média 0 e desvio padrão 1. Isso se deu devido a grande amplitude entre os valores dos parâmetros dos exames. 
+Os dados numéricos dos exames de sangue foram normalizados utilizando a técnica de StandardScaler, que padroniza os valores com média 0 e desvio padrão 1. Essa normalização foi necessária devido à grande amplitude entre os parâmetros dos exames de sangue.
 
 ![](graficos_parametros.png)
 
+## Modelo
+
+A criação do modelo e suas definições iniciais foram feitas utilizando o método [`keras.Sequential`](https://keras.io/api/models/sequential/) do Keras, que permite a definição de camadas como  [`Dense`](https://keras.io/api/layers/core_layers/dense/) que são totalmente conectadas. Cada camada contém um número definido de neurônios; neste caso, foram utilizadas duas camadas com 64 e 32 neurônios, respectivamente. Esses neurônios são perceptrons.
+
+```
+model = Sequential()
+
+model.add(Input(shape=(X_train.shape[1],)))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(Y_train.shape[1], activation='sigmoid'))
+
+```
+
+O perceptron é a estrutura básica dos modelos de deep learning, considerado o "átomo" de uma rede neural. Ele é composto por uma entrada, um processamento e uma saída, mimetizando de forma simbólica as funções de um neurônio biológico (dendritos, axônio e terminais sinápticos). Esse processamento é expresso pela equação:
 
 
+$$
+y = f(\mathbf{w} \cdot \mathbf{x} + b)
+$$
+
+
+- y = saida
+- f = funçaõ de ativação
+- w = pesos
+- x = entrada
+- b = vies(bias)
+
+Na prática, com o Keras, a definição da camada Dense corresponde basicamente à definição dos termos dessa equação, da seguinte forma:
+
+**X (Entradas):** Refere-se à quantidade de "colunas" ou variáveis de entrada que irão alimentar o "neurônio", ou seja, os valores que serão usados para calcular e fazer a inferência, correspondendo às entradas do perceptron. Esse termo é definido na primeira linha do `keras.Sequential` com `Input(shape=X)`.
+
+**W (Pesos):** Existe um peso para cada entrada que o modelo recebe. Cada peso é um valor (ou coeficiente) que multiplica a entrada correspondente, conforme descrito na equação. No Keras, os pesos são inicializados pelo parâmetro [`keras.initializers`](https://keras.io/api/layers/initializers/), onde existem várias opções de inicialização. Caso não seja especificado, eles serão iniciados com [`glorot_uniform`](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/layers/core.py).
+
+**b (Viés):** O viés é semelhante aos pesos, mas ele é somado ao produto das entradas e dos pesos, permitindo mais flexibilidade ao modelo. Isso garante que, mesmo que as entradas sejam zero, a saída não seja necessariamente zero. No Keras, o viés é inicializado pelo parâmetro `bias_initializer`, que por padrão é inicializado com zeros.
+
+**Y (Saída):** A última camada define a saída, que no nosso caso foi definida com 9 unidades, correspondendo ao número de saídas (diagnósticos) presentes no dataset.
+
+Após a definição desses parâmetros, o próximo passo é a função soma: Ela agrega os valores das entradas multiplicadas pelos pesos, gerando o "valor de ativação", que será passado para a função de ativação. Esse processo não é um parâmetro da camada Dense, mas ocorre automaticamente dentro dela.
+
+**Função de Ativação:** Ela recebe o valor de ativação e gera a saída. As camadas ocultas usam a função de ativação ReLU (Retificação Linear), enquanto a camada de saída utiliza a função sigmoid, que é adequada para problemas de classificação multirrótulo (multilabel).
+
+- ReLu - A função relu de retificação linear executa uma ação bem simples, se o valor é negativo tem como saída 0 e se for positivo é devolvido o próprio valor. A ReLu é mais comumente usada por ser computacionalmente eficiente e também conseguir lidar bem com o [problema de gradiente desaparecido](https://www.deeplearningbook.com.br/o-problema-da-dissipacao-do-gradiente/) que de forma resumida é quando os valores os valores dos gradientes, que são necessários para atualizar os pesos durante o aprendizado, se tornam muito pequenos, tornando o processo de aprendizado lento ou ineficaz.
+
+``` activation='relu' ```
+
+- Sigmoid - A função Sigmoid transforma qualquer valor de entrada em um valor entre 0 e 1, o que a torna ideal para problemas de classificação binária. Valores grandes se aproximam de 1, e valores pequenos se aproximam de 0, permitindo que a saída seja interpretada como uma probabilidade.
+
+``` activation='sigmoid' ```
+
+- Softmax - A função Softmax é usada em redes neurais para problemas de classificação multiclasse. Ela transforma um conjunto de valores de entrada em probabilidades, distribuindo-as de forma que a soma seja igual a 1. Cada saída representa a probabilidade de pertencer a uma das classes, sendo a mais alta geralmente a previsão do modelo.
+
+``` activation='sigmoid' ```
+
+O aprendizado aconteça nas funções de somas e ativação
 
 

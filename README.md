@@ -50,7 +50,7 @@ Os dados numéricos dos exames de sangue foram normalizados utilizando a técnic
 
 ## Modelo
 
-A criação do modelo e suas definições iniciais foram feitas utilizando o método [`keras.Sequential`](https://keras.io/api/models/sequential/) do Keras, que permite a definição de camadas como  [`Dense`](https://keras.io/api/layers/core_layers/dense/) que são totalmente conectadas. Cada camada contém um número definido de neurônios; neste caso, foram utilizadas duas camadas com 64 e 32 neurônios, respectivamente. Esses neurônios são perceptrons.
+A criação do modelo e suas definições iniciais foram feitas utilizando o método [`keras.Sequential`](https://keras.io/api/models/sequential/) do Keras, que permite a definição de camadas como  [`Dense`](https://keras.io/api/layers/core_layers/dense/) que são totalmente conectadas. Cada camada contém um número definido de neurônios; neste caso, foram utilizadas duas camadas com 64 e 32 neurônios, respectivamente.
 
 ```
 model = Sequential()
@@ -62,7 +62,7 @@ model.add(Dense(Y_train.shape[1], activation='sigmoid'))
 
 ```
 
-O perceptron é a estrutura básica dos modelos de deep learning, considerado o "átomo" de uma rede neural. Ele é composto por uma entrada, um processamento e uma saída, mimetizando de forma simbólica as funções de um neurônio biológico (dendritos, axônio e terminais sinápticos). Esse processamento é expresso pela equação:
+Aquilo que chamamos de "neuronios" são denominados perceptrons, eles são a estrutura básica dos modelos de deep learning, considerado o "átomo" de uma rede neural. Ele é composto por uma entrada, um processamento e uma saída, mimetizando de forma simbólica as funções de um neurônio biológico (dendritos, axônio e terminais sinápticos). Esse processamento é expresso pela equação:
 
 
 $$
@@ -102,6 +102,39 @@ Após a definição desses parâmetros, o próximo passo é a função soma: Ela
 
 ``` activation='sigmoid' ```
 
-O aprendizado aconteça nas funções de somas e ativação
+**O aprendizado aconteça nas funções de somas e ativação**
+
+Após a construção e execução do código vamos ter criado a estrutura do modelo, o Keras oferece um método chamado summary() onde é possível visualizar as suas características:
+
+```
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ dense (Dense)                        │ (None, 64)                  │             960 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 32)                  │           2,080 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_2 (Dense)                      │ (None, 9)                   │             297 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 3,337 (13.04 KB)
+ Trainable params: 3,337 (13.04 KB)
+ Non-trainable params: 0 (0.00 B)
+
+```
+Os valores são calculados da seguinte forma
+
+Valor anterior * neurônios + neurônios
+
+A primeira linha com 960 parâmetros se refere:
+
+14(entrada) * 64(neurônios) + 64 (neurônios) = 960
+64 * 32 + 32 = 2080
+32 * 9 + 9 = 297
+
+## Treinamento
+
+
+
 
 

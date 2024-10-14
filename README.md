@@ -47,6 +47,7 @@ df = pd.concat([df, diagnosis_dummies], axis=1)
 Os dados numéricos dos exames de sangue foram normalizados utilizando a técnica de StandardScaler, que padroniza os valores com média 0 e desvio padrão 1. Essa normalização foi necessária devido à grande amplitude entre os parâmetros dos exames de sangue.
 
 ![](graficos_parametros.png)
+Gráfico com os dados não normalizados.
 
 ## Modelo
 
@@ -129,12 +130,58 @@ Valor anterior * neurônios + neurônios
 A primeira linha com 960 parâmetros se refere:
 
 14(entrada) * 64(neurônios) + 64 (neurônios) = 960
+
 64 * 32 + 32 = 2080
+
 32 * 9 + 9 = 297
 
 ## Treinamento
 
+Para o treinamento o primeiro passo é compilar o modelo, através do metodo [`.compile()`](https://keras.io/api/models/model_training_apis/) onde são ajustados os parametros do modelo. 
+
+
+```
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+```
+------------
+
+**Otimizador:**
+
+Otimizadores são algortimos usados dentro do modelo para efetuar o treinamento, com base na função de perda(diferença entre o resultado certo que o modelo deveria devolver e o predito) os valores de pesos e viéses são ajustados para melhorar a eficiencia do modelo. 
+    
+ -  Essa abordagem é chamada gradiente descendente. Em suma, em cada etapa, este método verifica, para cada parâmetro, para que lado a perda do conjunto de treinamento se moveria se você perturbou esse parâmetro apenas um pouco. 
+    Em seguida, atualiza o parâmetro na direção que pode reduzir a perda. [Dive into Deep Learning, 1.2.4. Algoritmos de Otimização](https://pt.d2l.ai/chapter_introduction/index.html?highlight=fun%C3%A7%C3%A3o%20de%20perda#algoritmos-de-otimizacao)
+
+Existem diversos tipos de otimizadores, no [Keras são disponibilizados 12 tipos](https://keras.io/api/optimizers/). Os Algoritmos mais comuns são o Adam, SGD, RMSProp e AdaGrad de maneira geral:
+
+- Adam é uma escolha padrão que funciona bem em muitos problemas.
+- SGD é útil para grandes conjuntos de dados e é a base de muitos otimizadores modernos.
+- RMSProp é adequado para redes neurais recorrentes (RNNs).
+- AdaGrad é útil para dados esparsos.(RUDER, 2016)
+
+Durante o projeto eu tentei inicialmente com RMSProp que foi proposto no curso mas acabei ficando com o Adam devido aos resultados um pouco melhores, não tanto mas melhores. 
+
+------------
+
+**Perda:**
 
 
 
+
+------------
+
+**Metricas:**
+
+
+
+# Referencias
+
+RUDER, Sebastian. An Overview of Gradient Descent Optimization Algorithms. arXiv, 2016. Disponível em: https://arxiv.org/abs/1609.04747. Acesso em: 14 out. 2024
+
+Dive into Deep Learning - Interactive deep learning book with code, math, and discussions
+https://pt.d2l.ai/index.html
+
+Deep Learning Book Brasil
+https://www.deeplearningbook.com.br/
 

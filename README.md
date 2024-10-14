@@ -137,7 +137,7 @@ A primeira linha com 960 parâmetros se refere:
 
 ## Treinamento
 
-Para o treinamento o primeiro passo é compilar o modelo, através do metodo [`.compile()`](https://keras.io/api/models/model_training_apis/) onde são ajustados os parametros do modelo. 
+Para o treinamento, o primeiro passo é compilar o modelo, através do método [`.compile()`](https://keras.io/api/models/model_training_apis/) onde são ajustados os parâmetros do modelo.
 
 
 ```
@@ -148,34 +148,55 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 
 **Otimizador:**
 
-Otimizadores são algortimos usados dentro do modelo para efetuar o treinamento, com base na função de perda(diferença entre o resultado certo que o modelo deveria devolver e o predito) os valores de pesos e viéses são ajustados para melhorar a eficiencia do modelo. 
-    
- -  Essa abordagem é chamada gradiente descendente. Em suma, em cada etapa, este método verifica, para cada parâmetro, para que lado a perda do conjunto de treinamento se moveria se você perturbou esse parâmetro apenas um pouco. 
-    Em seguida, atualiza o parâmetro na direção que pode reduzir a perda. [Dive into Deep Learning, 1.2.4. Algoritmos de Otimização](https://pt.d2l.ai/chapter_introduction/index.html?highlight=fun%C3%A7%C3%A3o%20de%20perda#algoritmos-de-otimizacao)
+Otimizadores são algoritmos usados dentro do modelo para efetuar o treinamento. Com base na função de perda (diferença entre o resultado correto que o modelo deveria devolver e o predito), os valores de pesos e vieses são ajustados para melhorar a eficiência do modelo.
 
-Existem diversos tipos de otimizadores, no [Keras são disponibilizados 12 tipos](https://keras.io/api/optimizers/). Os Algoritmos mais comuns são o Adam, SGD, RMSProp e AdaGrad de maneira geral:
+- Essa abordagem é chamada de gradiente descendente. Em suma, em cada etapa, este método verifica, para cada parâmetro, para que lado a perda do conjunto de treinamento se moveria se você perturbasse esse parâmetro apenas um pouco. Em seguida, atualiza o parâmetro na direção que pode reduzir a perda. [Dive into Deep Learning, 1.2.4. Algoritmos de Otimização](https://pt.d2l.ai/chapter_introduction/index.html?highlight=fun%C3%A7%C3%A3o%20de%20perda#algoritmos-de-otimizacao)
+
+Existem diversos tipos de otimizadores. No [Keras são disponibilizados 12 tipos](https://keras.io/api/optimizers/). Os algoritmos mais comuns são o Adam, SGD, RMSProp e AdaGrad. De maneira geral:
 
 - Adam é uma escolha padrão que funciona bem em muitos problemas.
 - SGD é útil para grandes conjuntos de dados e é a base de muitos otimizadores modernos.
 - RMSProp é adequado para redes neurais recorrentes (RNNs).
-- AdaGrad é útil para dados esparsos.(RUDER, 2016)
+- AdaGrad é útil para dados esparsos. (RUDER, 2016)
 
-Durante o projeto eu tentei inicialmente com RMSProp que foi proposto no curso mas acabei ficando com o Adam devido aos resultados um pouco melhores, não tanto mas melhores. 
+Durante o projeto, tentei inicialmente com RMSProp, que foi proposto no curso, mas acabei ficando com o Adam devido aos resultados um pouco melhores. Não foi uma grande diferença, mas os resultados foram melhores.
 
 ------------
 
 **Perda:**
 
+A perda ou função de perda é um componente do modelo que mede a discrepância entre as previsões do modelo e os valores esperados. Quando treinamos um modelo, o objetivo principal é diminuir a função de perda, de forma que o modelo faça previsões mais precisas. A função, como entrada, recebe as previsões do modelo e os valores reais, retornando um valor escalar que representa o erro. Esse valor é então utilizado pelo otimizador para ajustar os pesos da rede neural, em um processo iterativo de tentativa de redução do erro (GOODFELLOW, 2016, p. 82-83).
 
-
+Existem diversas funções de perda, sendo divididas em 3 grupos: perdas probabilísticas, perdas de regressão e Hinge Losses. O Keras dispõe de uma lista de funções que podem ser implementadas na compilação, que podem ser [consultadas na documentação](https://keras.io/api/losses/). Neste caso, foi utilizada a "binary crossentropy" pois foi realizado o processo de get_dummies, logo o modelo faz uma classificação binária dizendo se as entradas pertencem ou não a determinada categoria.
 
 ------------
 
-**Metricas:**
+**Metricas:** 
+
+A definição da métrica é um fator fundamental em um modelo, pois é a partir dela que, futuramente, serão realizadas otimizações, sempre usando os seus resultados como guia. Dessa forma, determinar os objetivos em termos de qual métrica utilizar é sempre um primeiro passo necessário (GOODFELLOW, 2016, p. 422).
+
+Neste projeto, foi escolhida a métrica de acurácia para entender quantas vezes um determinado resultado de exame foi diagnosticado corretamente. [Opções de metricas do Keras](https://keras.io/api/metrics/)
+
+$$
+{Acurácia} = \frac{\text{ Número de diagnósticos corretos }}{\text{ Total de diagnósticos }}
+$$
+
+### Fit Model
+
+Após a compilação do modelo é executado de fato o treinamento:
+
+    epocas=50
+    historico = model.fit(X_train, Y_train, epochs=epocas, batch_size=32, validation_split=0.2)
+
+**Épocas e batch size:**
+
+
 
 
 
 # Referencias
+
+GOODFELLOW, Ian; BENGIO, Yoshua; COURVILLE, Aaron. Deep Learning. MIT Press, 2016.
 
 RUDER, Sebastian. An Overview of Gradient Descent Optimization Algorithms. arXiv, 2016. Disponível em: https://arxiv.org/abs/1609.04747. Acesso em: 14 out. 2024
 

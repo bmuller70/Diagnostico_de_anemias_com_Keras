@@ -190,9 +190,13 @@ Após a compilação do modelo é executado de fato o treinamento:
 
 **Épocas e batch size:**
 
+A definição das épocas no treinamento significa a quantidade de vezes que o modelo vai percorrer todos os dados para realizar o treinamento e atualizar os pesos e vises. Porém não vão ser percorridos todos os dados de uma vez só, esses dados vão ser processados em lotes, os batchs. No nosso caso foram definidos inicialmente 50 épocas com um batch_size de 32 isso quer dizer que com um total de 1280 amostras vamos ter o seguinte comportamento: 
 
+- a cada época, o modelo processará 1280 ÷ 32 = 40 batches.
+-  O modelo ajusta seus pesos 40 vezes por época (após cada batch de 32 amostras).
+-  Após 50 épocas, o modelo terá ajustado os pesos 50 × 40 = 2000 vezes. 
 
-
+**Validation_Split:** Parâmetro que defini a quantidade de dados que vão ser utilizados no processo de validação do modelo. 
 
 # Referencias
 

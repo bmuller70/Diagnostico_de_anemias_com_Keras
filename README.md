@@ -205,13 +205,23 @@ Aqui está a correção ortográfica:
 
 Após o treino do modelo, partimos para o processo de validação, verificando a perda e a acurácia do modelo em relação aos dados de teste e validação que definimos anteriormente. Podemos observar que, ao executar o treino do modelo, salvamos sua saída em uma variável `historico`,o que possibilita a utilização do método [`history`](https://keras.io/api/models/model_training_apis/#:~:text=Returns,values%20(if%20applicable).) sse método retorna os valores de perda e os valores de métrica do modelo (no nosso caso, "accuracy"). Ele retorna um dicionário, o que permite que plotemos os resultados em gráficos, facilitando assim a visualização dos resultados do modelo.
 
-Gráficos concatenados usando o seaborn direto no history
-[](hist_graf1.png)
+- Gráficos concatenados usando o seaborn direto no history
+
+![](his_graf1.png)
 
 
-Gráficos separados usando a uma função para construir o plot.
-[](hist_graf2.png)
 
+
+- Gráficos separados usando a uma função para construir o plot.
+
+![](his_graf2.png)
+
+
+Além dos gráficos também é possível testar o modelo e visualizar uma analise resumida pelo método `evaluate` que apresenta o seguinte retorno:
+
+```
+9/9 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8223 - loss: 0.0934 Loss: 0.08661733567714691, Accuracy: 0.844357967376709 
+```
 
 # Referencias
 

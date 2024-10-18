@@ -198,6 +198,21 @@ A definição das épocas no treinamento significa a quantidade de vezes que o m
 
 **Validation_Split:** Parâmetro que defini a quantidade de dados que vão ser utilizados no processo de validação do modelo. 
 
+## Validação
+
+
+Aqui está a correção ortográfica:
+
+Após o treino do modelo, partimos para o processo de validação, verificando a perda e a acurácia do modelo em relação aos dados de teste e validação que definimos anteriormente. Podemos observar que, ao executar o treino do modelo, salvamos sua saída em uma variável `historico`,o que possibilita a utilização do método [`history`](https://keras.io/api/models/model_training_apis/#:~:text=Returns,values%20(if%20applicable).) sse método retorna os valores de perda e os valores de métrica do modelo (no nosso caso, "accuracy"). Ele retorna um dicionário, o que permite que plotemos os resultados em gráficos, facilitando assim a visualização dos resultados do modelo.
+
+Gráficos concatenados usando o seaborn direto no history
+[](hist_graf1.png)
+
+
+Gráficos separados usando a uma função para construir o plot.
+[](hist_graf2.png)
+
+
 # Referencias
 
 GOODFELLOW, Ian; BENGIO, Yoshua; COURVILLE, Aaron. Deep Learning. MIT Press, 2016.

@@ -223,6 +223,50 @@ Além dos gráficos também é possível testar o modelo e visualizar uma analis
 9/9 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8223 - loss: 0.0934 Loss: 0.08661733567714691, Accuracy: 0.844357967376709 
 ```
 
+Utilizando os resultados da perda e acurácia no treino e validação podemos ter uma orientação de quais ajustes que fizemos impactam o modelo. Se você [olhar no notebook](Keras_diagnostico_de_anemias.ipynb) do projeto vai ver que tentei fazer algumas mudanças no “chute” mesmo para testar diferentes valores dos parâmetros. Existem técnicas mais estruturadas para busca de parametros por tentativa e erro como o Random Search e Grid Search e que no Keras fazem parte do [KerasTuner](https://keras.io/api/keras_tuner/tuners/) que ajuda na otimização dos modelos buscando os melhores hiperparametros.
+
+#Testando o modelo
+
+Para testar o modelo eu separei alguns dados do próprio dataset de forma manual, extraindo eles de forma manual antes de dar início ao projeto. A exibição dos resultados de hemograma pode ser um pouco diferente, não os resultados, mas somente sua exibição. Dependendo do sistema de interface, da metodologia no laboratório e do equipamento no qual eles foram feitos pode ser que seja realizado com ou sem diferencial, e já tenha os valores calculados. Os resultados utilizados para teste são de um hemograma sem diferencial. 
+
+```
+# exame = {
+#     'WBC': 2.740,   # Contagem de glóbulos brancos
+#     'LYMp': 36.9,   # Porcentagem de linfócitos
+#     'NEUTp': 60.0,  # Porcentagem de neutrófilos
+#     'LYMn': 2.0,    # Contagem absoluta de linfócitos
+#     'NEUTn': 3.5,   # Contagem absoluta de neutrófilos
+#     'RBC': 4.77,    # Contagem de glóbulos vermelhos
+#     'HGB': 13.5,    # Hemoglobina
+#     'HCT': 39.7,    # Hematócrito
+#     'MCV': 83.2,    # Volume corpuscular médio
+#     'MCH': 28.3,    # Hemoglobina corpuscular média
+#     'MCHC': 320.0,  # Concentração de hemoglobina corpuscular
+#     'PLT': 167.0,   # Contagem de plaquetas
+#     'PDW': 0.15,    # Largura de distribuição de plaquetas
+#     'PCT': 0.02     # Proporção de plaquetas
+# }
+
+exame1 = {
+    'WBC': 8.67,
+    'LYMp': 25.8,
+    'NEUTp': 77.5,
+    'LYMn': 1.88,
+    'NEUTn': 5.14,
+    'RBC': 3.58,
+    'HGB': 10.2,
+    'HCT': 46.1,
+    'MCV': 102.8,
+    'MCH': 28.5,
+    'MCHC': 27.7,
+    'PLT': 272,
+    'PDW': 14.31,
+    'PCT': 0.26
+}
+```
+
+Esses resultados estavam identificados no dataset como saudável(exame) e  anemia normocítica e normocrômica(exame1). Como esse é um projeto de aprendizagem e experimentação da biblioteca eu não fui tão a fundo na validação dos resultados e valores, apenas utilizei algumas indicações do Manual de interpretação do Failace para manter o mínimo de coerência. 
+
 # Referencias
 
 GOODFELLOW, Ian; BENGIO, Yoshua; COURVILLE, Aaron. Deep Learning. MIT Press, 2016.

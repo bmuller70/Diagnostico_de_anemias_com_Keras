@@ -4,7 +4,7 @@
 
 
 # O projeto
-Esse projeto foi desenvolvido em conjunto com a formação da [Alura Deep Learning com Tensorflow e Keras](https://cursos.alura.com.br/formacao-deep-learning-tensorflow-keras), essa experiementação é uma adaptação do projeto que a instrutora fez em aula utilizando a base Iris, como eu gosto de ir fazendo com um tema do interesse em paralelo, acabei esse experimento. A ideia desse texto é compartilhar um pouco do que aprendi e as possibilidades do Keres/Tensorflow e também fortalecer o meu aprendizado. Se você chegou aqui espero que o texto seja útil, e caso você tenha correções, sugestões ou comentarios só me manda por favor, vou ficar feliz demais! 
+Esse projeto foi desenvolvido em conjunto com a formação da [Alura Deep Learning com Tensorflow e Keras](https://cursos.alura.com.br/formacao-deep-learning-tensorflow-keras), essa experimentação é uma adaptação do projeto que a instrutora fez em aula utilizando a base Iris, como eu gosto de ir fazendo com um tema do interesse em paralelo, acabei esse experimento. A ideia desse texto é compartilhar um pouco do que aprendi e as possibilidades do Keres/Tensorflow e também fortalecer o meu aprendizado. Se você chegou aqui espero que o texto seja útil, e caso você tenha correções, sugestões ou comentários só me manda por favor, vou ficar feliz demais! 
 
 # Objetivo
 O objetivo deste projeto é desenvolver um modelo preditivo capaz de identificar diferentes tipos de anemia a partir de exames de sangue utilizando técnicas de aprendizado de máquina, mais especificamente redes neurais implementadas com a biblioteca Keras. O sistema busca automatizar o processo de diagnóstico, detectando condições como anemia por deficiência de ferro, leucemia, anemias macrocíticas, entre outras, com base em resultados de hemogramas. Por ser parte da formação citada anteriormente não foram exploradas todas as possibilidades e otimizações disponíveis, trabalhando apenas com os aspectos apresentados no curso.
@@ -29,7 +29,7 @@ O projeto parte de um [conjunto de dados do Kaggle](https://www.kaggle.com/datas
     'PCT': 0.02     # Proporção de plaquetas
 ```
 
-Cada entrada está associada a um diagnósticos binário relacionado a diferentes tipos de anemia distribuidos da seguinte forma:
+Cada entrada está associada a um diagnósticos binário relacionado a diferentes tipos de anemia distribuídos da seguinte forma:
 
 ![](graficos_anemias.png)
 
@@ -63,7 +63,7 @@ model.add(Dense(Y_train.shape[1], activation='sigmoid'))
 
 ```
 
-Aquilo que chamamos de "neuronios" são denominados perceptrons, eles são a estrutura básica dos modelos de deep learning, considerado o "átomo" de uma rede neural. Ele é composto por uma entrada, um processamento e uma saída, mimetizando de forma simbólica as funções de um neurônio biológico (dendritos, axônio e terminais sinápticos). Esse processamento é expresso pela equação:
+Aquilo que chamamos de "neurônios" são denominados perceptrons, eles são a estrutura básica dos modelos de deep learning, considerado o "átomo" de uma rede neural. Ele é composto por uma entrada, um processamento e uma saída, mimetizando de forma simbólica as funções de um neurônio biológico (dendritos, axônio e terminais sinápticos). Esse processamento é expresso pela equação:
 
 
 $$
@@ -71,11 +71,11 @@ y = f(\mathbf{w} \cdot \mathbf{x} + b)
 $$
 
 
-- y = saida
-- f = funçaõ de ativação
+- y = saída
+- f = função de ativação
 - w = pesos
 - x = entrada
-- b = vies(bias)
+- b = viés(bias)
 
 Na prática, com o Keras, a definição da camada Dense corresponde basicamente à definição dos termos dessa equação, da seguinte forma:
 
@@ -171,7 +171,7 @@ Existem diversas funções de perda, sendo divididas em 3 grupos: perdas probabi
 
 ------------
 
-**Metricas:** 
+**Métricas:** 
 
 A definição da métrica é um fator fundamental em um modelo, pois é a partir dela que, futuramente, serão realizadas otimizações, sempre usando os seus resultados como guia. Dessa forma, determinar os objetivos em termos de qual métrica utilizar é sempre um primeiro passo necessário (GOODFELLOW, 2016, p. 422).
 

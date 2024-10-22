@@ -225,9 +225,9 @@ Além dos gráficos também é possível testar o modelo e visualizar uma analis
 
 Utilizando os resultados da perda e acurácia no treino e validação podemos ter uma orientação de quais ajustes que fizemos impactam o modelo. Se você [olhar no notebook](Keras_diagnostico_de_anemias.ipynb) do projeto vai ver que tentei fazer algumas mudanças no “chute” mesmo para testar diferentes valores dos parâmetros. Existem técnicas mais estruturadas para busca de parametros por tentativa e erro como o Random Search e Grid Search e que no Keras fazem parte do [KerasTuner](https://keras.io/api/keras_tuner/tuners/) que ajuda na otimização dos modelos buscando os melhores hiperparametros.
 
-#Testando o modelo
+# Testando o modelo
 
-Para testar o modelo eu separei alguns dados do próprio dataset de forma manual, extraindo eles de forma manual antes de dar início ao projeto. A exibição dos resultados de hemograma pode ser um pouco diferente, não os resultados, mas somente sua exibição. Dependendo do sistema de interface, da metodologia no laboratório e do equipamento no qual eles foram feitos pode ser que seja realizado com ou sem diferencial, e já tenha os valores calculados. Os resultados utilizados para teste são de um hemograma sem diferencial. 
+Para testar o modelo eu separei alguns dados do próprio dataset de forma manual, extraindo esses dados antes de dar início ao projeto. A exibição dos resultados de hemograma pode ser um pouco diferente, não os resultados, mas somente sua exibição. Dependendo do sistema de interface, da metodologia no laboratório e do equipamento no qual eles foram feitos pode ser que seja realizado com ou sem diferencial, e já tenha os valores calculados. Os resultados utilizados para teste são de um hemograma sem diferencial. 
 
 ```
 # exame = {
@@ -263,9 +263,66 @@ exame1 = {
     'PDW': 14.31,
     'PCT': 0.26
 }
+
+amostra_exame = pd.DataFrame([exame])
+amostra_exame_normalizada = scaler.transform(amostra_exame)
 ```
 
 Esses resultados estavam identificados no dataset como saudável(exame) e  anemia normocítica e normocrômica(exame1). Como esse é um projeto de aprendizagem e experimentação da biblioteca eu não fui tão a fundo na validação dos resultados e valores, apenas utilizei algumas indicações do Manual de interpretação do Failace para manter o mínimo de coerência. 
+
+Na célula junto com o dicionário dos resultados também está a transformação para um dataframe  e a normalização dos valores para ficar de acordo com o formato que foi utilizado para o treinamento do modelo. Após realizar essas transformações utilizamos o método [`predict()`](https://keras.io/api/models/model_training_apis/#:~:text=Generates%20output%20predictions%20for%20the%20input%20samples) para gerar a saída do modelo.
+Na linha abaixo observamos que há uma transformação na variável que salva a saída de model.predict:
+
+    predictions = (predictions > 0.5).astype(int)
+
+Como utilizamos as funções de saída sigmoid ou softmax(ver testes) ambas retornam uma probabilidade de os valores de entrada pertencer a uma determinada classe. Nessa situação em específico está fazendo um arredondamento para 0 ou 1 dependendo da probabilidade predita. A ideia com essa transformação é criar um array com valores binários referente a cada um dos diagnósticos, de forma que fique mais fácil a visualização da saída.  Em uma situação real seria necessário um modelo com maior acurácia para aumentar esse valor  de arrendondamento para garantia a precisão das previsões. 
+
+Após isso fizemos uma lista com os diagnósticos presentes no dataset:
+```
+# Nomes das colunas de diagnóstico
+diagnosis_columns = [
+    'Diagnosis_Healthy', 'Diagnosis_Iron deficiency anemia',
+    'Diagnosis_Leukemia', 'Diagnosis_Leukemia with thrombocytopenia',
+    'Diagnosis_Macrocytic anemia', 'Diagnosis_Normocytic hypochromic anemia',
+    'Diagnosis_Normocytic normochromic anemia', 'Diagnosis_Other microcytic anemia',
+    'Diagnosis_Thrombocytopenia'
+]
+```
+Utilizamos a função zip para combinar a lista dos resultados e as predições do modelo e com um laço simples podemos exibir os resultados de saída
+
+```
+# Exibir as previsões
+for col, pred in zip(diagnosis_columns, predictions[0]):
+    print(f"{col}: {'Positivo' if pred == 1 else 'Negativo'}")
+```
+
+Tendo com saída para os dicionarios:
+
+Exame:
+
+    Diagnosis_Healthy: Positivo
+    Diagnosis_Iron deficiency anemia: Negativo
+    Diagnosis_Leukemia: Negativo
+    Diagnosis_Leukemia with thrombocytopenia: Negativo
+    Diagnosis_Macrocytic anemia: Negativo
+    Diagnosis_Normocytic hypochromic anemia: Negativo
+    Diagnosis_Normocytic normochromic anemia: Negativo
+    Diagnosis_Other microcytic anemia: Negativo
+    Diagnosis_Thrombocytopenia: Negativo
+
+Exame1:
+
+    Diagnosis_Healthy: Negativo
+    Diagnosis_Iron deficiency anemia: Negativo
+    Diagnosis_Leukemia: Negativo
+    Diagnosis_Leukemia with thrombocytopenia: Negativo
+    Diagnosis_Macrocytic anemia: Negativo
+    Diagnosis_Normocytic hypochromic anemia: Positivo
+    Diagnosis_Normocytic normochromic anemia: Negativo
+    Diagnosis_Other microcytic anemia: Negativo
+    Diagnosis_Thrombocytopenia: Negativo
+
+Se você chegou até aqui, parabéns! E obrigado por ter dedicado esse tempo para acompanhar meu processo de aprendizagem e minhas experimentações com o Keras. Novamente, se você tiver dicas, observações ou apenas queira conversar sobre só me chamar, vou ficar feliz de poder trocar com pessoas que se interessam pelo assunto. 🙏🏽
 
 # Referencias
 
@@ -279,3 +336,4 @@ https://pt.d2l.ai/index.html
 Deep Learning Book Brasil
 https://www.deeplearningbook.com.br/
 
+‌FAILACE, R. Hemograma: manual de interpretação. [s.l.] Artmed Editora, 2015.

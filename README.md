@@ -4,10 +4,11 @@
 
 
 # O projeto
-Esse projeto foi desenvolvido em conjunto com a formação da Alura [Deep Learning com Tensorflow e Keras](https://cursos.alura.com.br/formacao-deep-learning-tensorflow-keras), essa experimentação é uma adaptação do projeto que a instrutora fez em aula utilizando a base Iris, como eu gosto de ir fazendo com um tema do interesse em paralelo, acabei fazendo essa experimentação. A ideia desse texto é compartilhar um pouco do que aprendi e as possibilidades do Keres/Tensorflow e também fortalecer o meu aprendizado. Além disso também tive como motivação a minha atuação dentro de laboratórios com sistemas LIS/LIMS e percebendo que o LAC é um espaço cheio de possibilidades para aplicações de IA seja na automatização quanto no auxilio diagnostico sendo projetos nesse sentido bastante interessante pra mim e provavelmente promissores para o futuro das analises clinicas em geral. Se você chegou aqui espero que o texto seja útil, e caso você tenha correções, sugestões ou comentários só me manda por favor, vou ficar feliz demais! 
+Esse projeto foi desenvolvido em conjunto com a formação da Alura [Deep Learning com Tensorflow e Keras](https://cursos.alura.com.br/formacao-deep-learning-tensorflow-keras), essa experimentação é uma adaptação do projeto que a instrutora fez em aula utilizando a base Iris, como tenho interesse em trabalhar com temas na área da saúde opteiu por realizar esse estudo em paralelo. A ideia desse texto é compartilhar um pouco do que aprendi e as possibilidades do Keres/Tensorflow e também fortalecer o meu aprendizado. Além disso também tive como motivação a minha atuação dentro de laboratórios com sistemas LIS/LIMS e percebendo que o LAC é um espaço cheio de possibilidades para aplicações de IA seja na automatização quanto no auxilio diagnostico sendo projetos nesse sentido bastante interessante pra mim e provavelmente promissores para o futuro das analises clinicas em geral. Se você chegou aqui espero que o texto seja útil, e caso você tenha correções, sugestões ou comentários só me manda por favor, vou ficar feliz demais! 
+
 
 # Objetivo
-O objetivo deste projeto é realizar um estudo sobre redes neurais simples, focando na estrutura do Perceptron Multicamadas (MLP). Para isso, será desenvolvido um modelo preditivo capaz de identificar diferentes tipos de anemia a partir de exames de sangue, utilizando técnicas de aprendizado de máquina, mais especificamente redes neurais totalmente conectadas (feedforward) implementadas com a biblioteca Keras.
+Este projeto tem como objetivo estudar redes neurais simples, com foco na estrutura do Perceptron Multicamadas (MLP). Para isso, será desenvolvido um modelo preditivo capaz de identificar diferentes tipos de anemia a partir de exames de sangue, utilizando técnicas de aprendizado de máquina, mais especificamente redes neurais totalmente conectadas (feedforward) implementadas com a biblioteca Keras.
 O sistema busca automatizar a detecção de condições como anemia por deficiência de ferro, leucemia e anemias macrocíticas com base em dados de hemogramas. Como parte de um estudo sobre essa arquitetura, o foco será na implementação e compreensão dos aspectos fundamentais da rede neural, sem explorar otimizações avançadas.
 
 
@@ -100,7 +101,7 @@ Após a definição desses parâmetros, o próximo passo é a função soma: Ela
 
 ``` activation='relu' ```
 
-- Sigmoid - A função Sigmoid transforma qualquer valor de entrada em um valor entre 0 e 1, o que a torna ideal para problemas de classificação binária. Valores grandes se aproximam de 1, e valores pequenos se aproximam de 0, permitindo que a saída seja interpretada como uma probabilidade.
+- Sigmoid - A função Sigmoid transforma qualquer valor de entrada em um valor entre 0 e 1, o que a torna ideal para problemas de classificação binária. Valores grandes se aproximam de 1, e valores pequenos se aproximam de 0, permitindo que a saída seja interpretada como uma probabilidade. Apesar não ser tão útil no problema abordado eu utilizei a função em carácter de experimentação
 
 ``` activation='sigmoid' ```
 
@@ -325,7 +326,12 @@ Exame1:
     Diagnosis_Other microcytic anemia: Negativo
     Diagnosis_Thrombocytopenia: Negativo
 
-Se você chegou até aqui, parabéns! E obrigado por ter dedicado esse tempo para acompanhar meu processo de aprendizagem e minhas experimentações com o Keras. Novamente, se você tiver dicas, observações ou apenas queira conversar sobre só me chamar, vou ficar feliz de poder trocar com pessoas que se interessam pelo assunto. 🙏🏽
+# Discussão dos resultados
+
+Os resultados do modelo indicam que a abordagem baseada em um Perceptron Multicamadas (MLP) utilizando Keras foi capaz de classificar os diferentes tipos de anemia com um desempenho satisfatório. Durante o treinamento, o modelo apresentou uma convergência estável, com redução da função de perda e melhora na acurácia ao longo das épocas. No entanto, ao avaliar os resultados na base de teste, observou-se que a performance pode ser impactada por possíveis limitações nos dados, como desbalanceamento entre classes ou a necessidade de um pré-processamento mais refinado. Além disso, técnicas como regularização, ajuste de hiperparâmetros e a experimentação com arquiteturas mais complexas poderiam ser exploradas para melhorar a generalização do modelo. Mesmo com essas considerações, o estudo atingiu seu principal objetivo: demonstrar a aplicabilidade de redes neurais simples na classificação de exames de sangue, proporcionando um entendimento prático sobre o funcionamento do MLP em problemas de diagnóstico médico.
+
+
+Se você chegou até aqui obrigado por ter dedicado esse tempo para acompanhar meu processo de aprendizagem e minhas experimentações com o Keras e espero que você também tenha aprendido algo no processo. Novamente, se você tiver dicas, observações ou apenas queira conversar sobre só me chamar, vou ficar feliz de poder trocar com pessoas que se interessam pelo assunto. 🙏🏽
 
 # Referencias
 

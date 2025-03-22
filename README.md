@@ -7,7 +7,8 @@
 Esse projeto foi desenvolvido em conjunto com a formação da Alura [Deep Learning com Tensorflow e Keras](https://cursos.alura.com.br/formacao-deep-learning-tensorflow-keras), essa experimentação é uma adaptação do projeto que a instrutora fez em aula utilizando a base Iris, como eu gosto de ir fazendo com um tema do interesse em paralelo, acabei fazendo essa experimentação. A ideia desse texto é compartilhar um pouco do que aprendi e as possibilidades do Keres/Tensorflow e também fortalecer o meu aprendizado. Além disso também tive como motivação a minha atuação dentro de laboratórios com sistemas LIS/LIMS e percebendo que o LAC é um espaço cheio de possibilidades para aplicações de IA seja na automatização quanto no auxilio diagnostico sendo projetos nesse sentido bastante interessante pra mim e provavelmente promissores para o futuro das analises clinicas em geral. Se você chegou aqui espero que o texto seja útil, e caso você tenha correções, sugestões ou comentários só me manda por favor, vou ficar feliz demais! 
 
 # Objetivo
-O objetivo deste projeto é desenvolver um modelo preditivo capaz de identificar diferentes tipos de anemia a partir de exames de sangue utilizando técnicas de aprendizado de máquina, mais especificamente redes neurais implementadas com a biblioteca Keras. O sistema busca automatizar o processo de diagnóstico, detectando condições como anemia por deficiência de ferro, leucemia, anemias macrocíticas, entre outras, com base em resultados de hemogramas. Por ser parte da formação citada anteriormente não foram exploradas todas as possibilidades e otimizações disponíveis, trabalhando apenas com os aspectos apresentados no curso.
+O objetivo deste projeto é realizar um estudo sobre redes neurais simples, focando na estrutura do Perceptron Multicamadas (MLP). Para isso, será desenvolvido um modelo preditivo capaz de identificar diferentes tipos de anemia a partir de exames de sangue, utilizando técnicas de aprendizado de máquina, mais especificamente redes neurais totalmente conectadas (feedforward) implementadas com a biblioteca Keras.
+O sistema busca automatizar a detecção de condições como anemia por deficiência de ferro, leucemia e anemias macrocíticas com base em dados de hemogramas. Como parte de um estudo sobre essa arquitetura, o foco será na implementação e compreensão dos aspectos fundamentais da rede neural, sem explorar otimizações avançadas.
 
 
 
@@ -105,7 +106,7 @@ Após a definição desses parâmetros, o próximo passo é a função soma: Ela
 
 - Softmax - A função Softmax é usada em redes neurais para problemas de classificação multiclasse. Ela transforma um conjunto de valores de entrada em probabilidades, distribuindo-as de forma que a soma seja igual a 1. Cada saída representa a probabilidade de pertencer a uma das classes, sendo a mais alta geralmente a previsão do modelo.
 
-``` activation='sigmoid' ```
+``` activation='softmax' ```
 
 **O aprendizado aconteça nas funções de somas e ativação**
 
@@ -204,8 +205,6 @@ A definição das épocas no treinamento significa a quantidade de vezes que o m
 
 ## Validação
 
-
-Aqui está a correção ortográfica:
 
 Após o treino do modelo, partimos para o processo de validação, verificando a perda e a acurácia do modelo em relação aos dados de teste e validação que definimos anteriormente. Podemos observar que, ao executar o treino do modelo, salvamos sua saída em uma variável `historico`,o que possibilita a utilização do método [`history`](https://keras.io/api/models/model_training_apis/#:~:text=Returns,values%20(if%20applicable).) sse método retorna os valores de perda e os valores de métrica do modelo (no nosso caso, "accuracy"). Ele retorna um dicionário, o que permite que plotemos os resultados em gráficos, facilitando assim a visualização dos resultados do modelo.
 
